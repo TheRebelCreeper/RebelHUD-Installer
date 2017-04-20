@@ -32,17 +32,6 @@ public class Tools
 	
 	private static File zipPath;
 	
-	/**The file path for 32 bit Windows**/
-	private static File win32FilePath = new File(Constants.TF_CUSTOM_WIN_86 + "dl.zip");
-	/**The file path for 64 bit Windows**/
-	private static File win64FilePath = new File(Constants.TF_CUSTOM_WIN + "dl.zip");
-	/**The file path for 32 bit Windows on the D drive**/
-	private static File win32FilePathD = new File(Constants.TF_CUSTOM_WIN_86_D + "dl.zip");
-	/**The file path for 64 bit Windows on the D drive**/
-	private static File win64FilePathD = new File(Constants.TF_CUSTOM_WIN_D + "dl.zip");
-	/**The file path for OSX**/
-	private static File macFilePath = new File(Constants.TF_CUSTOM_MAC + "dl.zip");
-	
 	private static URL urlHUD;
 	static
 	{
@@ -198,44 +187,19 @@ public class Tools
 	 */
 	private static int checkOS() throws Throwable
 	{
-		File folder = win64FilePath.getParentFile();	// Sets the file to Windows 64 bit path
-		if (folder.exists())							// If the folder exists
+		int count = 0;
+		while (true)
 		{
-			zipPath = win64FilePath;					// Sets the download path
-			strInstallPath = Constants.TF_CUSTOM_WIN;	// Sets the installation path
-			return 1;
-		}
-		
-		folder = win32FilePath.getParentFile();		// Sets the file to Windows 32 bit path
-		if (folder.exists())						// If the folder exists
-		{
-			zipPath = win32FilePath;
-			strInstallPath = Constants.TF_CUSTOM_WIN_86;
-			return 1;
-		}
-		
-		folder = win64FilePathD.getParentFile();			// Sets the file to Windows 64 bit path
-		if (folder.exists())							// If the folder exists
-		{
-			zipPath = win64FilePathD;
-			strInstallPath = Constants.TF_CUSTOM_WIN_D;
-			return 1;
-		}
-		
-		folder = win32FilePathD.getParentFile();		// Sets the file to Windows 32 bit path
-		if (folder.exists())						// If the folder exists
-		{
-			zipPath = win32FilePathD;
-			strInstallPath = Constants.TF_CUSTOM_WIN_86_D;
-			return 1;
-		}
-		
-		folder = macFilePath.getParentFile();	// Sets the file to Mac OSX path
-		if (folder.exists())					// If the folder exists
-		{
-			zipPath = macFilePath;
-			strInstallPath = Constants.TF_CUSTOM_MAC;
-			return 1;
+			if (count == Constants.tf2Locations.length)
+				break;
+			File folder = new File(Constants.tf2Locations[count]);	// Sets the file to Mac OSX path
+			if (folder.exists())					// If the folder exists
+			{
+				zipPath = new File(Constants.tf2Locations[count] + "dl.zip");
+				strInstallPath = Constants.tf2Locations[count];
+				return 1;
+			}
+			count++;
 		}
 		
 		throw new Throwable("TF2 could not be found", new Throwable("TF2 Not Installed"));
@@ -316,7 +280,7 @@ public class Tools
         	Scanner in = new Scanner(new URL(Constants.LATEST_INSTALLER).openStream());	// Opens connection to the version.txt
 			double inputVersion = in.nextDouble();	// Reads in the current version
 			in.close();
-			if (inputVersion > Constants.installerVersion)	// If there is a newer version
+			if (inputVersion > Constants.INSTALLER_VERSION)	// If there is a newer version
 			{
 				answer =
 		                JOptionPane.showConfirmDialog(null, "A new version of this"
