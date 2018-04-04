@@ -233,7 +233,6 @@ public class Tools
 			in = new Scanner(new File(strInstallPath + "RebelHud/version.txt"));	// Opens local version.txt
             input2 = in.next();
 			currentVersion = toDouble(input2);	// Reads in the current version
-            System.out.println(currentVersion);
 			in.close();
 			
 			if (latestVersion > currentVersion)	// If there is a newer version

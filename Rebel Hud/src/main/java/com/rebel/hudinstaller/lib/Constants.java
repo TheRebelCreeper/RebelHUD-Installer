@@ -3,7 +3,7 @@ package com.rebel.hudinstaller.lib;
 public class Constants 
 {
 	/**Version of the program**/
-	public static final double INSTALLER_VERSION = 2.5;
+	public static final double INSTALLER_VERSION = 2.51;
 	
 	/**Path for 64 bit Windows**/
 	public static final String TF_CUSTOM_WIN = "C:/Program Files (x86)/Steam/SteamApps/common/Team Fortress 2/tf/custom/";
