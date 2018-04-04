@@ -220,22 +220,27 @@ public class Tools
 		{
 			Scanner in;
 			int choice;
+			String input1;
+			String input2;
 			double currentVersion;	// Version of the HUD currently installed
 			double latestVersion;	// Latest version of the HUD
 			
 			in = new Scanner(new URL(Constants.LATEST_HUD).openStream());	// Opens connection to online version.txt
-			latestVersion = in.nextDouble();	// Reads in the latest version
+            input1 = in.next();
+			latestVersion = toDouble(input1);	// Reads in the latest version
 			in.close();
 
 			in = new Scanner(new File(strInstallPath + "RebelHud/version.txt"));	// Opens local version.txt
-			currentVersion = in.nextDouble();	// Reads in the current version
+            input2 = in.next();
+			currentVersion = toDouble(input2);	// Reads in the current version
+            System.out.println(currentVersion);
 			in.close();
 			
 			if (latestVersion > currentVersion)	// If there is a newer version
 			{
 				String strUpdateMsg = "There are updates availible.\n"
-									+ "Current version: " + currentVersion + "\n"
-									+ "Latest Version: " + latestVersion + "\n"
+									+ "Current version: " + input2 + "\n"
+									+ "Latest Version: " + input1 + "\n"
 									+ "Would you like to install the update?";
 				Object[] options = {"Yes", "No"};
 				choice = JOptionPane.showOptionDialog(null, strUpdateMsg, "Availible Updates", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
@@ -528,5 +533,24 @@ public class Tools
 			out.write(buffer, 0, bytesRead);
 		}
 	}
+
+    /**
+     * Takes a string and converts to a double
+     *
+     * @param   text    Version number as a String
+     * @return  Double
+     */
+    private static double toDouble(String str)
+    {
+        int firstDecimal = str.indexOf('.');
+        String temp = str;
+        if (firstDecimal != -1)
+        {
+            String firstHalf = str.substring(0, firstDecimal + 1);
+            String secondHalf = str.substring(firstDecimal + 1);
+            temp = firstHalf + secondHalf.replaceAll("\\.", "");
+        }
+        return new Double(temp).doubleValue();
+    }
 }
 
