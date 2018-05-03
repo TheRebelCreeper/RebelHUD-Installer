@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Rebel Hud/src/main/main.iml" filepath="$PROJECT_DIR$/Rebel Hud/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rebel Hud/Rebel Hud.iml" filepath="$PROJECT_DIR$/Rebel Hud/Rebel Hud.iml" />
     </modules>
   </component>
 </project>
