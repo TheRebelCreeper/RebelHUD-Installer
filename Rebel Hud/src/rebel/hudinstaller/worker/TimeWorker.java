@@ -9,7 +9,7 @@ public class TimeWorker extends Worker
     /**
      * Constructor sets the delay for the progress bar
      *
-     * @param        delay        The delay in milliseconds
+     * @param delay The delay in milliseconds
      */
     public TimeWorker(int delay)
     {
@@ -19,10 +19,7 @@ public class TimeWorker extends Worker
     /**
      * Creates a timer to count from 0 to 99
      *
-     * @pre none
-     * @param        none
-     * @return none
-     * @post none
+     * @return null
      */
     protected Object doInBackground()
     {
@@ -31,7 +28,7 @@ public class TimeWorker extends Worker
             setProgress(i);
             try
             {
-                Thread.sleep(myDelay);
+                Thread.sleep(delay);
             } catch(InterruptedException e)
             {
                 return null;

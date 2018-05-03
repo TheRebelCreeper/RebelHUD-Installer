@@ -11,46 +11,40 @@ import javax.swing.SwingWorker;
 
 public abstract class Worker extends SwingWorker<Object, Object> implements PropertyChangeListener
 {
-    protected int myDelay;
+    protected final int delay;
 
     /**
      * Sets the delay of the worker
      *
-     * @param        delay
+     * @param delay
      */
     public Worker(int delay)
     {
-        myDelay = delay;
+        this.delay = delay;
     }
 
     /**
      * Updates the progress of the progress bar
      *
-     * @pre none
-     * @param        evt                Contains the property that was changed
-     * @return none
-     * @post The progress is updated
+     * @param evt Contains the property that was changed
      */
     public void propertyChange(PropertyChangeEvent evt)
     {
         if("progress" == evt.getPropertyName())
         {
             int progress = (Integer) evt.getNewValue();
-            setProgress(progress);        // Sets the current progress
+            setProgress(progress);      // Sets the current progress
         }
     }
 
     /**
      * Used to run the install process on a second thread.
      *
-     * @pre none
-     * @param        none
-     * @return NULL
-     * @post none
+     * @return null
      */
     protected Object doInBackground()
     {
-        process();                // Starts the worker process
+        process();      // Starts the worker process
         return null;
     }
 

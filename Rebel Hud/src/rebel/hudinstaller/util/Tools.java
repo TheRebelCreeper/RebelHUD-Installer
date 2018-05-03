@@ -131,11 +131,8 @@ public class Tools
     /**
      * Checks if the HUD is currently installed
      *
-     * @param none
      * @return Returns 1 if the HUD is installed
-     * @throws Throws an error if the HUD is not installed
-     * @pre none
-     * @post none
+     * @throws Throwable Throws an error if the HUD is not installed
      */
     private static int checkInstalled() throws Throwable
     {
@@ -154,7 +151,6 @@ public class Tools
     /**
      * Checks what the operation system the user has
      *
-     * @param none
      * @return Returns 1 if an operation system is found
      * @throws Throwable Throws an error if it is unknown
      * @pre none
@@ -295,10 +291,7 @@ public class Tools
     /**
      * Downloads the new version of the installer
      *
-     * @param Path The path of the current installer
-     * @return none
-     * @pre none
-     * @post none
+     * @param path The path of the current installer
      */
     private static void downloadInstaller(String path)
     {
@@ -317,11 +310,7 @@ public class Tools
     /**
      * Downloads the ZIP of the HUD
      *
-     * @param none
-     * @return none
-     * @throws Throws a download error if it cannot download
-     * @pre none
-     * @post none
+     * @throws Throwable Throws a download error if it cannot download
      */
     private static void downloadZip() throws Throwable
     {
@@ -337,11 +326,7 @@ public class Tools
     /**
      * Extracts the ZIP file to a temporary folder
      *
-     * @param none
-     * @return none
-     * @throws Throws an error if it cannot extract
-     * @pre The ZIP file is downloaded
-     * @post The files are extracted from the ZIP
+     * @throws Throwable Throws an error if it cannot extract
      */
     private static void extractZip() throws Throwable
     {
@@ -357,11 +342,7 @@ public class Tools
     /**
      * Copies the folders from the temporary folder to the HUD installation path
      *
-     * @param none
-     * @return none
-     * @throws Throws an error if the files cannot copy
-     * @pre none
-     * @post none
+     * @throws Throwable Throws an error if the files cannot copy
      */
     private static void copyHud() throws Throwable
     {
@@ -379,11 +360,8 @@ public class Tools
      * Unzips a ZIP file
      *
      * @param zipPath  The location where the ZIP was downloaded to
-     * @param destpath The location where the files will be extracted to
-     * @return none
-     * @throws Throws an error if the ZIP cannot be extracted
-     * @pre none
-     * @post none
+     * @param destPath The location where the files will be extracted to
+     * @throws Throwable Throws an error if the ZIP cannot be extracted
      */
     private static void unZip(File zipPath, File destPath) throws IOException
     {
@@ -417,10 +395,7 @@ public class Tools
      * Extracts the ZIP file
      *
      * @param filePath Where to extract the files to
-     * @param in       Input stream of the file
-     * @return none
-     * @pre none
-     * @post none
+     * @param in Input stream of the file
      */
     private static void extract(ZipInputStream in, String filePath) throws IOException
     {
@@ -439,10 +414,7 @@ public class Tools
      *
      * @param file The file that will be downloaded
      * @param url  The URL of the file to download
-     * @return none
-     * @throws Throws an error if the file cannot download
-     * @pre none
-     * @post none
+     * @throws Throwable Throws an error if the file cannot download
      */
     private static void dl(File file, URL url) throws Throwable
     {
@@ -463,9 +435,6 @@ public class Tools
      * Deletes a file
      *
      * @param file The file to be deleted
-     * @return none
-     * @pre The file exists
-     * @post The file is deleted
      */
     private static void delete(File file)
     {
@@ -500,9 +469,6 @@ public class Tools
      *
      * @param in  Stream to read from
      * @param out Stream to write to
-     * @return none
-     * @pre none
-     * @post none
      */
     private static void transfer(InputStream in, OutputStream out) throws IOException
     {
@@ -517,7 +483,7 @@ public class Tools
     /**
      * Takes a string and converts to a double
      *
-     * @param text Version number as a String
+     * @param str Version number as a String
      * @return Double
      */
     private static double toDouble(String str)

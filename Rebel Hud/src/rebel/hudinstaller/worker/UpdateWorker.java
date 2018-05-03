@@ -23,41 +23,38 @@ public class UpdateWorker extends Worker
     /**
      * Updates the HUD by checking if the installed version is the newest
      *
-     * @param none
-     * @return none
-     * @pre The HUD is installed
-     * @post The HUD is updated
+     * @return null
      */
     public void process()
     {
-        TimeWorker Timer = new TimeWorker(myDelay);                        // Creates a timer with a delay of 50 ms
+        TimeWorker Timer = new TimeWorker(delay);           // Creates a timer with a delay of 50 ms
         try
         {
-            if(Tools.updateHud() == 1)                                                // If the user wants to update, complete the installation
+            if(Tools.updateHud() == 1)                      // If the user wants to update, complete the installation
             {
-                Timer.execute();                                                        // Starts the timer on a separate thread
-                Timer.addPropertyChangeListener(this);                // Sets the timer to update the property listener
+                Timer.execute();                            // Starts the timer on a separate thread
+                Timer.addPropertyChangeListener(this);      // Sets the timer to update the property listener
                 Tools.installHudUpdating();
-                while(true)                                                                        // While loop pauses program
+                while(true)                                 // While loop pauses program
                 {
-                    if(Timer.isDone() == true)                                // Program resumes once Timer is done with its task
+                    if(Timer.isDone())                      // Program resumes once Timer is done with its task
                     {
                         break;
                     }
                 }
                 setProgress(100);
                 // Message showing update status is displayed
-                JOptionPane.showMessageDialog(null, "RebelHud updated successfully.", "Update Status",
-                                              JOptionPane.INFORMATION_MESSAGE);
-                setProgress(0);                        // Progress reset to 0%
+                JOptionPane.showMessageDialog(null, "RebelHud updated successfully.",
+                                              "Update Status", JOptionPane.INFORMATION_MESSAGE);
+                setProgress(0);     // Progress reset to 0%
             }
-        } catch(Throwable e)                                // Handles the possible errors
+        } catch(Throwable e)        // Handles the possible errors
         {
-            Timer.cancel(true);                        // Cancels the timer if an error is encountered
-            Tools.cleanUp();                        // Deletes the ZIP download and temporary files
+            Timer.cancel(true);      // Cancels the timer if an error is encountered
+            Tools.cleanUp();                            // Deletes the ZIP download and temporary files
 
-            JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage(), e.getCause().getMessage(),
-                                          JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage(),
+                                          e.getCause().getMessage(), JOptionPane.ERROR_MESSAGE);
             setProgress(0);
         }
     }

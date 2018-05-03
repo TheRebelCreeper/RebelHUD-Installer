@@ -9,7 +9,7 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class TransparentButton extends JButton
 {
-    private float alphaValue;
+    private final float alphaValue;
 
     public TransparentButton(String text, float alpha)
     {

@@ -29,17 +29,17 @@ public class HudUI implements ActionListener, PropertyChangeListener
     /**
      * Delay of the installer timer
      **/
-    private int installDelay = 50;
+    private final int installDelay = 50;
     /**
      * Delay of the update timer
      **/
-    private int updateDelay = 50;
+    private final int updateDelay = 50;
     /**
      * Delay of the removal timer
      **/
-    private int removeDelay = 10;
+    private final int removeDelay = 10;
 
-    private float alpha = 0.85f;
+    private final float alpha = 0.85f;
 
     private JFrame hudFrame;
     private JPanel hudGUI, buttonPanel;
@@ -50,37 +50,22 @@ public class HudUI implements ActionListener, PropertyChangeListener
 
     /**
      * Creates the frame of the GUI
-     *
-     * @pre none
-     * @param        none
-     * @return none
-     * @post The UI is setup
      */
     public HudUI()
     {
         JFrame.setDefaultLookAndFeelDecorated(false);
-        hudFrame = new JFrame("RebelHUD Installer");                                // Sets the name of the window
-        hudFrame.setResizable(
-                false);                                                                // Makes the window non-resizable
-        fillPanel();                                                                                                // Creates the controls for the window
-        hudFrame.setContentPane(
-                hudGUI);                                                        // Adds the controls for the window
-        hudFrame.setDefaultCloseOperation(
-                JFrame.EXIT_ON_CLOSE);        // Sets the window to close when the X is pressed
-        hudFrame.setSize(340,
-                         210);                                                                        // Sets the size of the window
-        hudFrame.setLocationRelativeTo(
-                null);                                                // Sets the program to launch in the center of the screen
+        hudFrame = new JFrame("RebelHUD Installer");           // Sets the name of the window
+        hudFrame.setResizable(false);                               // Makes the window non-resizable
+        fillPanel();                                                // Creates the controls for the window
+        hudFrame.setContentPane(hudGUI);                            // Adds the controls for the window
+        hudFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // Sets the window to close when the X is pressed
+        hudFrame.setSize(340, 210);                   // Sets the size of the window
+        hudFrame.setLocationRelativeTo(null);                       // Sets the program to launch in the center of the screen
         hudFrame.setVisible(true);
     }
 
     /**
      * Creates the objects to be used in the UI
-     *
-     * @pre hudGUI exists
-     * @param        none
-     * @return none
-     * @post The UI has components in it
      */
     public void fillPanel()
     {
@@ -97,14 +82,11 @@ public class HudUI implements ActionListener, PropertyChangeListener
         hudGUI.add(buttonPanel);
 
         // Creation of the Install Button
-        installButton = new TransparentButton("Install RebelHud",
-                                              alpha);                        // Creates the button and sets its text
+        installButton = new TransparentButton("Install RebelHud", alpha);      // Creates the button and sets its text
         installButton.setFont(new Font("Arial", Font.BOLD, 18));        // Sets the font of the button
-        installButton.setLocation(10,
-                                  42);                                                        // Sets the location of the button
-        installButton.setSize(310,
-                              60);                                                                // Sets the size of the button
-        installButton.addActionListener(this);                                                //
+        installButton.setLocation(10,42);                                    // Sets the location of the button
+        installButton.setSize(310,60);                               // Sets the size of the button
+        installButton.addActionListener(this);
         buttonPanel.add(installButton);
 
         // Creation of the Update Button
@@ -124,10 +106,8 @@ public class HudUI implements ActionListener, PropertyChangeListener
         buttonPanel.add(removeButton);
 
         // Creation of the progress bar
-        UIManager.put("ProgressBar.selectionForeground",
-                      Color.black);                // Sets the color of the text to black
-        UIManager.put("ProgressBar.selectionBackground",
-                      Color.black);                // Sets the color of the text to black
+        UIManager.put("ProgressBar.selectionForeground", Color.black);  // Sets the color of the text to black
+        UIManager.put("ProgressBar.selectionBackground", Color.black);  // Sets the color of the text to black
         progressBar = new JProgressBar(0, 100);
         progressBar.setBackground(UIManager.getColor("Button.background"));
         progressBar.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -147,10 +127,7 @@ public class HudUI implements ActionListener, PropertyChangeListener
     /**
      * Changes the percent finished on the progress bar
      *
-     * @pre none
-     * @param        evt                The property that was changed
-     * @return none
-     * @post The progress bar is updated
+     * @param evt The property that was changed
      */
     public void propertyChange(PropertyChangeEvent evt)
     {
@@ -158,53 +135,44 @@ public class HudUI implements ActionListener, PropertyChangeListener
         {
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(
-                    progress);                                        // Sets the percentage on the progress bar
+                    progress);      // Sets the percentage on the progress bar
         }
     }
 
     /**
      * Checks for any actions performed with the GUI
      *
-     * @pre A button was pressed
-     * @param        evt                The action that was executed
-     * @return none
-     * @post An action happens
+     * @param evt The action that was executed
      */
     public void actionPerformed(ActionEvent evt)
     {
-        if(evt.getSource() == installButton)                // Checks if the Install button was pressed
+        if(evt.getSource() == installButton)                            // Checks if the Install button was pressed
         {
-            InstallWorker install = new InstallWorker(installDelay);        // Used to install the HUD
-            install.execute();                                                                                        // Starts installation process on a second thread
-            install.addPropertyChangeListener(
-                    this);                                        // Sets install to update the property listener
+            InstallWorker install = new InstallWorker(installDelay);    // Used to install the HUD
+            install.execute();                                          // Starts installation process on a second thread
+            install.addPropertyChangeListener(this);                    // Sets install to update the property listener
         }
-        else if(evt.getSource() == updateButton)        // Checks if the Update button was pressed
+        else if(evt.getSource() == updateButton)                        // Checks if the Update button was pressed
         {
-            UpdateWorker update = new UpdateWorker(updateDelay);                // Used to update the HUD
-            update.execute();                                                                                        // Starts update process on a second thread
-            update.addPropertyChangeListener(
-                    this);                                                // Sets update to update the property listener
+            UpdateWorker update = new UpdateWorker(updateDelay);        // Used to update the HUD
+            update.execute();                                           // Starts update process on a second thread
+            update.addPropertyChangeListener(this);                     // Sets update to update the property listener
         }
-        else if(evt.getSource() == removeButton)        // Checks if the Uninstall button was pressed
+        else if(evt.getSource() == removeButton)                        // Checks if the Uninstall button was pressed
         {
-            RemoveWorker uninstall = new RemoveWorker(removeDelay);                // Used to remove the HUD
-            uninstall
-                    .execute();                                                                                // Starts the uninstallation on a second thread
-            uninstall.addPropertyChangeListener(
-                    this);                                        // Sets uninstall to update the property listener
+            RemoveWorker uninstall = new RemoveWorker(removeDelay);     // Used to remove the HUD
+            uninstall.execute();                                        // Starts the uninstallation on a second thread
+            uninstall.addPropertyChangeListener(this);                  // Sets uninstall to update the property listener
         }
     }
 
     /**
      * Takes an image and resizes it
      *
-     * @param w The width of the image
-     * @param h The height of the image
-     * @pre none
-     * @param        img                The image to resize
+     * @param w   The width of the image
+     * @param h   The height of the image
+     * @param img The image to resize
      * @return Returns a scaled image
-     * @post The image size is changed
      */
     public ImageIcon resize(ImageIcon img, int w, int h)
     {
