@@ -324,7 +324,8 @@ public class Tools
                                     new File(strInstallPath));
         } catch(IOException e)
         {
-            throw new Exception("The HUD could not be installed.", new Exception("File copying error", e));
+            throw new Exception("The HUD could not be installed. File is being used by another program." +
+                                "\nPlease exit TF2 if it is open.", new Exception("File copying error", e));
         }
     }
 

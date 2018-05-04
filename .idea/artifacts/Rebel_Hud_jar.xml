@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Rebel Hud:jar">
+    <output-path>$PROJECT_DIR$/Rebel Hud/bin/artifacts/Rebel_Hud_jar</output-path>
+    <root id="archive" name="Rebel Hud.jar">
+      <element id="module-output" name="Rebel Hud" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Rebel Hud/libs/commons-io-2.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
