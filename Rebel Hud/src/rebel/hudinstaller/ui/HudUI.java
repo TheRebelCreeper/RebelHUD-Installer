@@ -1,24 +1,15 @@
 package rebel.hudinstaller.ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
+import rebel.hudinstaller.worker.Installer;
+import rebel.hudinstaller.worker.Uninstaller;
+import rebel.hudinstaller.worker.Updater;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.UIManager;
-
-import rebel.hudinstaller.worker.InstallWorker;
-import rebel.hudinstaller.worker.RemoveWorker;
-import rebel.hudinstaller.worker.UpdateWorker;
 
 /**
  * @author Aaron Lampert
@@ -26,19 +17,6 @@ import rebel.hudinstaller.worker.UpdateWorker;
 
 public class HudUI implements ActionListener, PropertyChangeListener
 {
-    /**
-     * Delay of the installer timer
-     **/
-    private final int installDelay = 50;
-    /**
-     * Delay of the update timer
-     **/
-    private final int updateDelay = 50;
-    /**
-     * Delay of the removal timer
-     **/
-    private final int removeDelay = 10;
-
     private final float alpha = 0.85f;
 
     private JFrame hudFrame;
@@ -134,8 +112,7 @@ public class HudUI implements ActionListener, PropertyChangeListener
         if(evt.getPropertyName() == "progress")
         {
             int progress = (Integer) evt.getNewValue();
-            progressBar.setValue(
-                    progress);      // Sets the percentage on the progress bar
+            progressBar.setValue(progress);      // Sets the percentage on the progress bar
         }
     }
 
@@ -146,23 +123,20 @@ public class HudUI implements ActionListener, PropertyChangeListener
      */
     public void actionPerformed(ActionEvent evt)
     {
-        if(evt.getSource() == installButton)                            // Checks if the Install button was pressed
+        if(evt.getSource() == installButton)                      // Checks if the Install button was pressed
         {
-            InstallWorker install = new InstallWorker(installDelay);    // Used to install the HUD
-            install.execute();                                          // Starts installation process on a second thread
-            install.addPropertyChangeListener(this);                    // Sets install to update the property listener
+            Installer install = new Installer(this);          // Used to install the HUD
+            install.start();                                     // Starts installation process on a second thread
         }
-        else if(evt.getSource() == updateButton)                        // Checks if the Update button was pressed
+        else if(evt.getSource() == updateButton)                 // Checks if the Update button was pressed
         {
-            UpdateWorker update = new UpdateWorker(updateDelay);        // Used to update the HUD
-            update.execute();                                           // Starts update process on a second thread
-            update.addPropertyChangeListener(this);                     // Sets update to update the property listener
+            Updater update = new Updater(this);              // Used to update the HUD
+            update.start();                                     // Starts update process on a second thread
         }
-        else if(evt.getSource() == removeButton)                        // Checks if the Uninstall button was pressed
+        else if(evt.getSource() == removeButton)                // Checks if the Uninstall button was pressed
         {
-            RemoveWorker uninstall = new RemoveWorker(removeDelay);     // Used to remove the HUD
-            uninstall.execute();                                        // Starts the uninstallation on a second thread
-            uninstall.addPropertyChangeListener(this);                  // Sets uninstall to update the property listener
+            Uninstaller uninstall = new Uninstaller(this);   // Used to remove the HUD
+            uninstall.start();                                  // Starts the uninstallation on a second thread
         }
     }
 

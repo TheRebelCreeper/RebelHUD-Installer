@@ -1,26 +1,17 @@
 package rebel.hudinstaller.util;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import org.apache.commons.io.FileUtils;
+import rebel.hudinstaller.lib.Constants;
+import rebel.hudinstaller.ui.HudUI;
+
+import javax.swing.*;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import javax.swing.JOptionPane;
-
-import org.apache.commons.io.FileUtils;
-
-import rebel.hudinstaller.lib.Constants;
-import rebel.hudinstaller.ui.HudUI;
 
 /**
  * Contains methods needed to actually download the HUD
@@ -48,14 +39,14 @@ public class Tools
     /**
      * Installs the HUD
      *
-     * @throws Throwable Throws an error if the HUD could not download
+     * @throws Exception Throws an error if the HUD could not download
      */
-    public static void installHud() throws Throwable
+    public static void installHud() throws Exception
     {
         checkOS();                  // Checks what the OS is
-        if(checkInstalled() == 1)   // Checks if the HUD is installed
+        if(checkInstalled())        // Checks if the HUD is installed
         {
-            throw new Throwable("The HUD is already installed", new Throwable("Installation Error"));
+            throw new Exception("The HUD is already installed", new Exception("Installation Error"));
         }
         downloadZip();              // Downloads the HUD as a ZIP file
         extractZip();               // Extracts the ZIP file to a temporary folder
@@ -66,9 +57,9 @@ public class Tools
     /**
      * Installs the HUD if it is being updated
      *
-     * @throws Throwable Throws an error if the HUD could not download
+     * @throws Exception Throws an error if the HUD could not download
      */
-    public static void installHudUpdating() throws Throwable
+    public static void installHudUpdating() throws Exception
     {
         checkOS();      // Checks what the OS is
         downloadZip();  // Downloads the HUD as a ZIP file
@@ -81,15 +72,15 @@ public class Tools
      * Checks if there is an update available to the HUD
      *
      * @return Returns 1 if the user wants to update, 0 if they do not
-     * @throws Throwable Throws an error if the HUD is not installed
+     * @throws Exception Throws an error if the HUD is not installed
      */
-    public static int updateHud() throws Throwable
+    public static boolean updateHud() throws Exception
     {
         checkOS();                  // Checks what the OS is
-        if(checkInstalled() == 1)   // Checks if the HUD is installed
+        if(checkInstalled())        // Checks if the HUD is installed
             return checkVersion();  // Checks if an update is available
         else
-            throw new Throwable("The HUD is not currently installed", new Throwable("Update Error"));
+            throw new Exception("The HUD is not currently installed", new Exception("Update Error"));
     }
 
     /**
@@ -97,9 +88,9 @@ public class Tools
      *
      * @return Returns 1 if the user wants to update, 0 if they do not
      */
-    public static int updateInstaller()
+    public static boolean updateInstaller()
     {
-        return checkInstallerVersion(); // Checks what the installer version is
+        return checkInstallerVersion();     // Checks what the installer version is
     }
 
     /**
@@ -107,13 +98,13 @@ public class Tools
      *
      * @throws Throwable Throws an error if the HUD is not installed
      */
-    public static void removeHud() throws Throwable
+    public static void removeHud() throws Exception
     {
         checkOS();
-        if(checkInstalled() == 1)
+        if(checkInstalled())
             delete(new File(strInstallPath + "RebelHud/"));
         else
-            throw new Throwable("The HUD is not currently installed", new Throwable("Removal Error"));
+            throw new Exception("The HUD is not currently installed", new Exception("Removal Error"));
     }
 
     /**
@@ -131,40 +122,27 @@ public class Tools
     /**
      * Checks if the HUD is currently installed
      *
-     * @return Returns 1 if the HUD is installed
-     * @throws Throwable Throws an error if the HUD is not installed
+     * @return Returns True if the HUD is installed
      */
-    private static int checkInstalled() throws Throwable
+    private static boolean checkInstalled()
     {
         File folder = new File(strInstallPath + "RebelHud/version.txt");
-        if(!folder.exists())        // If the file does not exist
-        {
-            //throw new Throwable("The HUD is not currently installed", new Throwable("Update Error"));
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
+        return folder.exists();        // If the file exists
     }
 
     /**
      * Checks what the operation system the user has
      *
      * @return Returns 1 if an operation system is found
-     * @throws Throwable Throws an error if it is unknown
-     * @pre none
-     * @post The install path is set
+     * @throws Exception Throws an error if it is unknown
      */
-    private static int checkOS() throws Throwable
+    private static int checkOS() throws Exception
     {
         int count = 0;
-        while(true)
+        while(count < Constants.tf2Locations.length)
         {
-            if(count == Constants.tf2Locations.length)
-                break;
-            File folder = new File(Constants.tf2Locations[count]);        // Sets the file to Mac OSX path
-            if(folder.exists())                                        // If the folder exists
+            File folder = new File(Constants.tf2Locations[count]);      // Sets the file to the path at index count
+            if(folder.exists())                                         // If the folder exists
             {
                 zipPath = new File(Constants.tf2Locations[count] + "dl.zip");
                 strInstallPath = Constants.tf2Locations[count];
@@ -172,20 +150,16 @@ public class Tools
             }
             count++;
         }
-
-        throw new Throwable("TF2 could not be found", new Throwable("TF2 Not Installed"));
+        throw new Exception("TF2 could not be found", new Throwable("TF2 Not Installed"));
     }
 
     /**
      * Checks if any updates are available for the HUD
      *
-     * @param none
-     * @return Returns 1 if the user wants to update, 0 if they do not
-     * @throws Throws an error if the HUD is not installed
-     * @pre The HUD is installed
-     * @post none
+     * @return Returns True if the user wants to update, False if they do not
+     * @throws Exception an error if the HUD is not installed
      */
-    private static int checkVersion() throws Throwable
+    private static boolean checkVersion() throws Exception
     {
         try
         {
@@ -193,21 +167,20 @@ public class Tools
             int choice;
             String input1;
             String input2;
-            double currentVersion;        // Version of the HUD currently installed
-            double latestVersion;        // Latest version of the HUD
+            double currentVersion;      // Version of the HUD currently installed
+            double latestVersion;       // Latest version of the HUD
 
-            in = new Scanner(
-                    new URL(Constants.LATEST_HUD).openStream());        // Opens connection to online version.txt
+            in = new Scanner(new URL(Constants.LATEST_HUD).openStream());   // Opens connection to online version.txt
             input1 = in.next();
-            latestVersion = toDouble(input1);        // Reads in the latest version
+            latestVersion = toDouble(input1);                               // Reads in the latest version
             in.close();
 
-            in = new Scanner(new File(strInstallPath + "RebelHud/version.txt"));        // Opens local version.txt
+            in = new Scanner(new File(strInstallPath + "RebelHud/version.txt"));    // Opens local version.txt
             input2 = in.next();
-            currentVersion = toDouble(input2);        // Reads in the current version
+            currentVersion = toDouble(input2);      // Reads in the current version
             in.close();
 
-            if(latestVersion > currentVersion)        // If there is a newer version
+            if(latestVersion > currentVersion)      // If there is a newer version
             {
                 String strUpdateMsg = "There are updates availible.\n"
                         + "Current version: " + input2 + "\n"
@@ -215,55 +188,47 @@ public class Tools
                         + "Would you like to install the update?";
                 Object[] options = {"Yes", "No"};
                 choice = JOptionPane
-                        .showOptionDialog(null, strUpdateMsg, "Availible Updates", JOptionPane.YES_NO_OPTION,
-                                          JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-                if(choice == 0)        // If the user wants to update
-                {
-                    return 1;
-                }
-                else                                // If the user does not want to update
-                {
-                    return 0;
-                }
+                        .showOptionDialog(null, strUpdateMsg,
+                                          "Availible Updates", JOptionPane.YES_NO_OPTION,
+                                          JOptionPane.INFORMATION_MESSAGE,
+                                          null, options, options[0]);
+                return (choice == 0);
             }
-            else        // If there is not a newer version
+            else    // If there is not a newer version
             {
                 String strUpdateMsg = "There are no updates availible.\n";
-                @SuppressWarnings("unused")
-                Object[] options = {"Yes", "No"};
-                JOptionPane.showMessageDialog(null, strUpdateMsg, "Availible Updates", JOptionPane.INFORMATION_MESSAGE);
-                return 0;
+                JOptionPane.showMessageDialog(null, strUpdateMsg,
+                                              "Availible Updates", JOptionPane.INFORMATION_MESSAGE);
+                return false;
             }
         } catch(FileNotFoundException e)
         {
-            throw new Throwable("The HUD is not currently installed", new Throwable("Update Error"));
+            throw new Exception("The HUD is not currently installed", new Exception("Update Error"));
         }
     }
 
     /**
      * Checks if any updates are available for the installer
      *
-     * @param none
-     * @return Returns 1 if the user wants to update the installer
-     * @pre none
-     * @post none
+     * @return Returns True if the user wants to update the installer
      */
-    private static int checkInstallerVersion()
+    private static boolean checkInstallerVersion()
     {
         int answer = -1;
-        String path = HudUI.class.getProtectionDomain().getCodeSource().getLocation()
-                .getPath();        // Path of the running JAR file
+        String path = HudUI.class.getProtectionDomain().
+                getCodeSource().getLocation().getPath();    // Path of the running JAR file
         try
         {
-            Scanner in = new Scanner(
-                    new URL(Constants.LATEST_INSTALLER).openStream());        // Opens connection to the version.txt
-            double inputVersion = in.nextDouble();        // Reads in the current version
+            Scanner in = new Scanner(new URL(Constants.LATEST_INSTALLER).openStream());
+            // Opens connection to the version.txt
+
+            double inputVersion = in.nextDouble();          // Reads in the current version
             in.close();
-            if(inputVersion > Constants.INSTALLER_VERSION)        // If there is a newer version
+            if(inputVersion > Constants.INSTALLER_VERSION)  // If there is a newer version
             {
-                answer =
-                        JOptionPane.showConfirmDialog(null, "A new version of this"
-                                                              + " installer is available\nWould you like to install it?",
+                answer = JOptionPane.showConfirmDialog(null, "A new version of this " +
+                                                               "installer is available" +
+                                                               "\nWould you like to install it?",
                                                       "Installer Update", JOptionPane.YES_NO_OPTION,
                                                       JOptionPane.INFORMATION_MESSAGE);
             }
@@ -273,18 +238,22 @@ public class Tools
                 Tools.downloadInstaller(URLDecoder.decode(path, "UTF-8"));
                 JOptionPane.showMessageDialog(null,
                                               "The update was completed successfuly.\n"
-                                                      + "Please restart the application in order for the changes take effect.");
-                return 1;
+                                                      + "Please restart the application in order" +
+                                                      " for the changes take effect.");
+                return true;
             }
-            else        // If the user does not want to update
+            else                    // If the user does not want to update
             {
-                return 0;
+                return false;
             }
         } catch(IOException e)
         {
-            JOptionPane.showMessageDialog(null, "ERROR: " + "Cannot Check Version Info", "ERROR",
+            JOptionPane.showMessageDialog(null,
+                                          "ERROR: " + "Cannot Check Version Info",
+                                          "ERROR",
                                           JOptionPane.ERROR_MESSAGE);
-            return 0;
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -299,60 +268,63 @@ public class Tools
         try
         {
             URL urlInstaller = new URL(Constants.INSTALLER_URL);        // URL of the JAR download
-            dl(installerPath, urlInstaller);        // Downloads the JAR file
-        } catch(Throwable e)
+            dl(installerPath, urlInstaller);                            // Downloads the JAR file
+        } catch(Exception e)
         {
-            JOptionPane
-                    .showMessageDialog(null, "ERROR: " + e.getMessage(), "Download error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                                          "ERROR: " + e.getMessage(),
+                                          "Download error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 
     /**
      * Downloads the ZIP of the HUD
      *
-     * @throws Throwable Throws a download error if it cannot download
+     * @throws Exception Throws a download error if it cannot download
      */
-    private static void downloadZip() throws Throwable
+    private static void downloadZip() throws Exception
     {
         try
         {
             dl(zipPath, urlHUD);        // Downloads the HUD
         } catch(IOException e)
         {
-            throw new Throwable("The HUD could not download", new Throwable("Download error"));
+            throw new Exception("The HUD could not be downloaded.", new Exception("Download Error", e));
         }
     }
 
     /**
      * Extracts the ZIP file to a temporary folder
      *
-     * @throws Throwable Throws an error if it cannot extract
+     * @throws Exception Throws an error if it cannot extract
      */
-    private static void extractZip() throws Throwable
+    private static void extractZip() throws Exception
     {
         try
         {
             unZip(zipPath, new File(strInstallPath + "temp/"));        // Unzips the ZIP file
         } catch(IOException e)
         {
-            throw new Throwable("The HUD could not be installed.\nPlease exit TF2.", new Throwable("File Error"));
+            throw new Exception("The HUD could not be installed.\nPlease exit TF2 if it is open.",
+                                new Exception("Extraction Error", e));
         }
     }
 
     /**
      * Copies the folders from the temporary folder to the HUD installation path
      *
-     * @throws Throwable Throws an error if the files cannot copy
+     * @throws Exception Throws an error if the files cannot copy
      */
-    private static void copyHud() throws Throwable
+    private static void copyHud() throws Exception
     {
         try
         {
-            FileUtils
-                    .copyDirectory(new File(strInstallPath + "temp/RebelHud-Master/custom/"), new File(strInstallPath));
+            FileUtils.copyDirectory(new File(strInstallPath + "temp/RebelHud-Master/custom/"),
+                                    new File(strInstallPath));
         } catch(IOException e)
         {
-            throw new Throwable("The HUD could not be installed", new Throwable("File Error"));
+            throw new Exception("The HUD could not be installed.", new Exception("File copying error", e));
         }
     }
 
@@ -361,7 +333,7 @@ public class Tools
      *
      * @param zipPath  The location where the ZIP was downloaded to
      * @param destPath The location where the files will be extracted to
-     * @throws Throwable Throws an error if the ZIP cannot be extracted
+     * @throws IOException Throws an error if the ZIP cannot be extracted
      */
     private static void unZip(File zipPath, File destPath) throws IOException
     {
@@ -369,11 +341,9 @@ public class Tools
         {
             destPath.mkdir();
         }
-        ZipInputStream in = new ZipInputStream(
-                new FileInputStream(zipPath));        // Input stream to read from the ZIP
-        ZipEntry entry = in
-                .getNextEntry();                                                                                // The entry from the ZIP file
-        while(entry != null)        // While there are still entries
+        ZipInputStream in = new ZipInputStream(new FileInputStream(zipPath));   // Input stream to read from the ZIP
+        ZipEntry entry = in.getNextEntry();                                     // The entry from the ZIP file
+        while(entry != null)                                                    // While there are still entries
         {
             String filePath = destPath + File.separator + entry.getName();
             if(!entry.isDirectory())
@@ -396,12 +366,13 @@ public class Tools
      *
      * @param filePath Where to extract the files to
      * @param in Input stream of the file
+     * @throws IOException
      */
     private static void extract(ZipInputStream in, String filePath) throws IOException
     {
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(filePath));
         byte[] bytes = new byte[4096];
-        int read = 0;
+        int read ;
         while((read = in.read(bytes)) != -1)
         {
             out.write(bytes, 0, read);
@@ -414,14 +385,14 @@ public class Tools
      *
      * @param file The file that will be downloaded
      * @param url  The URL of the file to download
-     * @throws Throwable Throws an error if the file cannot download
+     * @throws Exception Throws an error if the file cannot download
      */
-    private static void dl(File file, URL url) throws Throwable
+    private static void dl(File file, URL url) throws Exception
     {
         if(file != null)
         {
-            InputStream in = null;
-            OutputStream out = null;
+            InputStream in;
+            OutputStream out;
             in = url.openStream();
             out = new FileOutputStream(file);
             // Begin transfer
@@ -469,6 +440,7 @@ public class Tools
      *
      * @param in  Stream to read from
      * @param out Stream to write to
+     * @throws IOException
      */
     private static void transfer(InputStream in, OutputStream out) throws IOException
     {

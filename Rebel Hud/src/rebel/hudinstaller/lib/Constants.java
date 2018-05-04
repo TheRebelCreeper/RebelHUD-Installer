@@ -5,7 +5,7 @@ public class Constants
     /**
      * Version of the program
      **/
-    public static final double INSTALLER_VERSION = 2.51;
+    public static final double INSTALLER_VERSION = 2.52;
 
     /**
      * Path for 64 bit Windows
