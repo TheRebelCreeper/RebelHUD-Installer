@@ -7,26 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f19affd-3285-4c4f-a42b-989b124825a4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_io_2_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/HudInstaller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/lib/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/ui/HudUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/ui/TransparentButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/util/Tools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/worker/InstallWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/worker/RemoveWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/worker/TimeWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/worker/UpdateWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/com/rebel/hudinstaller/worker/Worker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/commons-io-2.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/images/Background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/production/Rebel Hud/commons-io-2.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/production/main/commons-io-2.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/production/main/images/Background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/bin/production/main/main/main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rebel Hud/resource/commons-io-2.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/TransparentButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/TransparentButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Installer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Installer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Uninstaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Uninstaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Updater.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Updater.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HudInstaller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HudInstaller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -53,7 +42,7 @@
       <file leaf-file-name="Tools.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1336">
+            <state relative-caret-position="5304">
               <caret line="323" column="62" selection-start-line="323" selection-start-column="62" selection-end-line="323" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -63,11 +52,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="-501">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HudUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="139" column="37" selection-start-line="139" selection-start-column="37" selection-end-line="139" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -102,13 +100,13 @@
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/RemoveWorker.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/InstallWorker.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/UpdateWorker.java" />
-        <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Installer.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Uninstaller.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Updater.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java" />
         <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java" />
+        <option value="$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java" />
       </list>
     </option>
   </component>
@@ -129,8 +127,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,7 +191,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15332031" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.excludes" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -294,18 +292,18 @@
       <workItem from="1525372168499" duration="3118000" />
       <workItem from="1525397489129" duration="5812000" />
       <workItem from="1525417290422" duration="2344000" />
+      <workItem from="1534258990797" duration="191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13109000" />
+    <option name="totallyTimeSpent" value="13300000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -319,6 +317,7 @@
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -330,7 +329,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32943678" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,6 +344,34 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5304">
+          <caret line="323" column="62" selection-start-line="323" selection-start-column="62" selection-end-line="323" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="initializer##0;class#Tools#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -445,13 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="148" column="37" lean-forward="true" selection-start-line="148" selection-start-column="37" selection-end-line="148" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/worker/Updater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -473,19 +493,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/util/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1336">
+        <state relative-caret-position="5304">
           <caret line="323" column="62" selection-start-line="323" selection-start-column="62" selection-end-line="323" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -496,8 +506,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/lib/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="-501">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/ui/HudUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="139" column="37" selection-start-line="139" selection-start-column="37" selection-end-line="139" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rebel Hud/src/rebel/hudinstaller/HudInstaller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

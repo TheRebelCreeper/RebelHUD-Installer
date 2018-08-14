@@ -11,15 +11,15 @@ import rebel.hudinstaller.util.Tools;
 
 public class HudInstaller
 {
-    /**
-     * Creates the GUI for the program
-     */
-    public static void main(String[] args)
-    {
-        if(!Tools.updateInstaller())        // Checks if there is an update, and runs the installer if there isn't
-        {
-            @SuppressWarnings("unused")
-            HudUI rebelHudUI = new HudUI();     // Creates a window for the program
-        }
-    }
+	/**
+	 * Creates the GUI for the program
+	 */
+	public static void main(String[] args)
+	{
+		if (!Tools.updateInstaller())        // Checks if there is an update, and runs the installer if there isn't
+		{
+			@SuppressWarnings ("unused")
+			HudUI rebelHudUI = new HudUI();     // Creates a window for the program
+		}
+	}
 }
