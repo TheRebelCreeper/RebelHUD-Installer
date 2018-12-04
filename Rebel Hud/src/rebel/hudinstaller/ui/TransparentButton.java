@@ -1,10 +1,7 @@
 package rebel.hudinstaller.ui;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class TransparentButton extends JButton

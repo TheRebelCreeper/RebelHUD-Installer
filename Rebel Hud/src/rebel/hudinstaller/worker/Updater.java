@@ -1,9 +1,8 @@
 package rebel.hudinstaller.worker;
 
-import javax.swing.JOptionPane;
-
 import rebel.hudinstaller.util.Tools;
 
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -21,9 +20,10 @@ public class Updater extends Thread
      * Holds the PropertyChangeListener for Timer
      */
     private PropertyChangeListener propertyListener;
-    
+
     /**
      * Constructor for UpdateWorker
+     *
      * @param p PropertyChangeListener
      */
     public Updater(PropertyChangeListener p)
@@ -39,14 +39,15 @@ public class Updater extends Thread
         Timer timer = new Timer(updateDelay);           // Creates a timer with a delay of 50 ms
         try
         {
-            if(Tools.updateHud())                      // If the user wants to update, complete the installation
+            if (Tools.updateHud())                      // If the user wants to update, complete the installation
             {
                 timer.execute();                                        // Starts the timer on a separate thread
-                timer.addPropertyChangeListener(propertyListener);      // Sets the timer to update the property listener
+                timer.addPropertyChangeListener(
+                        propertyListener);      // Sets the timer to update the property listener
                 Tools.installHudUpdating();
-                while(true)                                 // While loop pauses program
+                while (true)                                 // While loop pauses program
                 {
-                    if(timer.isDone())                      // Program resumes once Timer is done with its task
+                    if (timer.isDone())                      // Program resumes once Timer is done with its task
                     {
                         break;
                     }
@@ -57,7 +58,8 @@ public class Updater extends Thread
                                               "Update Status", JOptionPane.INFORMATION_MESSAGE);
                 timer.setMyProgress(0);     // Progress reset to 0%
             }
-        } catch(Exception e)        // Handles the possible errors
+        }
+        catch (Exception e)        // Handles the possible errors
         {
             timer.cancel(true);      // Cancels the timer if an error is encountered
             Tools.cleanUp();                            // Deletes the ZIP download and temporary files

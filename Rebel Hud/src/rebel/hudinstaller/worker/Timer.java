@@ -30,13 +30,14 @@ public class Timer extends SwingWorker<Object, Object> implements PropertyChange
      */
     protected Object doInBackground()
     {
-        for(int i = 0; i < 100; i++)
+        for (int i = 0; i < 100; i++)
         {
             setProgress(i);
             try
             {
                 Thread.sleep(delay);
-            } catch(InterruptedException e)
+            }
+            catch (InterruptedException e)
             {
                 return null;
             }
@@ -52,7 +53,7 @@ public class Timer extends SwingWorker<Object, Object> implements PropertyChange
      */
     public void propertyChange(PropertyChangeEvent evt)
     {
-        if("progress" == evt.getPropertyName())
+        if ("progress" == evt.getPropertyName())
         {
             int progress = (Integer) evt.getNewValue();
             setProgress(progress);      // Sets the current progress

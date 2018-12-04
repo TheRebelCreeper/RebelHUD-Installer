@@ -1,9 +1,8 @@
 package rebel.hudinstaller.worker;
 
-import javax.swing.JOptionPane;
-
 import rebel.hudinstaller.util.Tools;
 
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -42,9 +41,9 @@ public class Uninstaller extends Thread
             timer.execute();                                        // Starts the timer on a separate thread
             timer.addPropertyChangeListener(propertyListener);      // Sets the timer to update the property listener
             Tools.removeHud();
-            while(true)                                 // While loop pauses program
+            while (true)                                 // While loop pauses program
             {
-                if(timer.isDone())                      // Program resumes once Timer is done with its task
+                if (timer.isDone())                      // Program resumes once Timer is done with its task
                 {
                     break;
                 }
@@ -54,7 +53,8 @@ public class Uninstaller extends Thread
             JOptionPane.showMessageDialog(null, "RebelHud uninstalled successfully.",
                                           "Uninstallation Status", JOptionPane.INFORMATION_MESSAGE);
             timer.setMyProgress(0);         // Progress reset to 0%
-        } catch(Exception e)        // Handles the possible errors
+        }
+        catch (Exception e)        // Handles the possible errors
         {
             timer.cancel(true);    // Cancels the timer if an error is encountered
             Tools.cleanUp();                          // Removes the temporary files
