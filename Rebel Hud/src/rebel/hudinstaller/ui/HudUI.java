@@ -38,8 +38,7 @@ public class HudUI implements ActionListener, PropertyChangeListener
         hudFrame.setContentPane(hudGUI);                            // Adds the controls for the window
         hudFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // Sets the window to close when the X is pressed
         hudFrame.setSize(340, 210);                   // Sets the size of the window
-        hudFrame.setLocationRelativeTo(
-                null);                       // Sets the program to launch in the center of the screen
+        hudFrame.setLocationRelativeTo(null);                       // Sets the program to launch in the center of the screen
         hudFrame.setVisible(true);
     }
 
@@ -63,8 +62,8 @@ public class HudUI implements ActionListener, PropertyChangeListener
         // Creation of the Install Button
         installButton = new TransparentButton("Install RebelHud", alpha);      // Creates the button and sets its text
         installButton.setFont(new Font("Arial", Font.BOLD, 18));        // Sets the font of the button
-        installButton.setLocation(10, 42);                                    // Sets the location of the button
-        installButton.setSize(310, 60);                               // Sets the size of the button
+        installButton.setLocation(10,42);                                    // Sets the location of the button
+        installButton.setSize(310,60);                               // Sets the size of the button
         installButton.addActionListener(this);
         buttonPanel.add(installButton);
 
@@ -110,7 +109,7 @@ public class HudUI implements ActionListener, PropertyChangeListener
      */
     public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getPropertyName() == "progress")
+        if(evt.getPropertyName() == "progress")
         {
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);      // Sets the percentage on the progress bar
@@ -124,17 +123,17 @@ public class HudUI implements ActionListener, PropertyChangeListener
      */
     public void actionPerformed(ActionEvent evt)
     {
-        if (evt.getSource() == installButton)                      // Checks if the Install button was pressed
+        if(evt.getSource() == installButton)                      // Checks if the Install button was pressed
         {
             Installer install = new Installer(this);          // Used to install the HUD
             install.start();                                     // Starts installation process on a second thread
         }
-        else if (evt.getSource() == updateButton)                 // Checks if the Update button was pressed
+        else if(evt.getSource() == updateButton)                 // Checks if the Update button was pressed
         {
             Updater update = new Updater(this);              // Used to update the HUD
             update.start();                                     // Starts update process on a second thread
         }
-        else if (evt.getSource() == removeButton)                // Checks if the Uninstall button was pressed
+        else if(evt.getSource() == removeButton)                // Checks if the Uninstall button was pressed
         {
             Uninstaller uninstall = new Uninstaller(this);   // Used to remove the HUD
             uninstall.start();                                  // Starts the uninstallation on a second thread

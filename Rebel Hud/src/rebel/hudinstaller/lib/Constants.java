@@ -52,22 +52,27 @@ public class Constants
      **/
     public static final String TF_CUSTOM_MAC = System.getProperty(
             "user.home") + "/Library/Application Support/Steam/SteamApps/common/Team Fortress 2/tf/custom/";
+
+    public static String[] tf2Locations = {TF_CUSTOM_WIN, TF_CUSTOM_WIN_LIBRARY, TF_CUSTOM_WIN_86, TF_CUSTOM_WIN_86_LIBRARY,
+            TF_CUSTOM_WIN_D, TF_CUSTOM_WIN_D_LIBRARY, TF_CUSTOM_WIN_86_D, TF_CUSTOM_WIN_86_D_LIBRARY, TF_CUSTOM_MAC};
+
     /**
      * URL for the HUD download
      **/
     public static final String GIT_URL = "https://github.com/TheRebelCreeper/RebelHud/archive/master.zip";
+
     /**
      * URL for that latest version of the HUD
      **/
     public static final String LATEST_HUD = "https://raw.githubusercontent.com/TheRebelCreeper/RebelHud/master/custom/RebelHud/version.txt";
+
     /**
      * URL for the latest version of the installer
      **/
     public static final String LATEST_INSTALLER = "https://raw.githubusercontent.com/TheRebelCreeper/RebelHud-Installer/master/latest.txt";
+
     /**
      * URL for the installer download
      **/
     public static final String INSTALLER_URL = "https://github.com/TheRebelCreeper/RebelHud-Installer/blob/master/RebelHUD%20Installer.jar?raw=true";
-    public static String[] tf2Locations = {TF_CUSTOM_WIN, TF_CUSTOM_WIN_LIBRARY, TF_CUSTOM_WIN_86, TF_CUSTOM_WIN_86_LIBRARY,
-                                           TF_CUSTOM_WIN_D, TF_CUSTOM_WIN_D_LIBRARY, TF_CUSTOM_WIN_86_D, TF_CUSTOM_WIN_86_D_LIBRARY, TF_CUSTOM_MAC};
 }

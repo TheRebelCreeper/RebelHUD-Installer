@@ -28,8 +28,7 @@ public class Tools
         try
         {
             urlHUD = new URL(Constants.GIT_URL);        // URL to download the HUD from
-        }
-        catch (MalformedURLException e)
+        } catch(MalformedURLException e)
         {
             e.printStackTrace();
         }
@@ -45,7 +44,7 @@ public class Tools
     public static void installHud() throws Exception
     {
         checkOS();                  // Checks what the OS is
-        if (checkInstalled())        // Checks if the HUD is installed
+        if(checkInstalled())        // Checks if the HUD is installed
         {
             throw new Exception("The HUD is already installed", new Exception("Installation Error"));
         }
@@ -78,14 +77,10 @@ public class Tools
     public static boolean updateHud() throws Exception
     {
         checkOS();                  // Checks what the OS is
-        if (checkInstalled())        // Checks if the HUD is installed
-        {
+        if(checkInstalled())        // Checks if the HUD is installed
             return checkVersion();  // Checks if an update is available
-        }
         else
-        {
             throw new Exception("The HUD is not currently installed", new Exception("Update Error"));
-        }
     }
 
     /**
@@ -106,14 +101,10 @@ public class Tools
     public static void removeHud() throws Exception
     {
         checkOS();
-        if (checkInstalled())
-        {
+        if(checkInstalled())
             delete(new File(strInstallPath + "RebelHud/"));
-        }
         else
-        {
             throw new Exception("The HUD is not currently installed", new Exception("Removal Error"));
-        }
     }
 
     /**
@@ -148,10 +139,10 @@ public class Tools
     private static int checkOS() throws Exception
     {
         int count = 0;
-        while (count < Constants.tf2Locations.length)
+        while(count < Constants.tf2Locations.length)
         {
             File folder = new File(Constants.tf2Locations[count]);      // Sets the file to the path at index count
-            if (folder.exists())                                         // If the folder exists
+            if(folder.exists())                                         // If the folder exists
             {
                 zipPath = new File(Constants.tf2Locations[count] + "dl.zip");
                 strInstallPath = Constants.tf2Locations[count];
@@ -189,7 +180,7 @@ public class Tools
             currentVersion = toDouble(input2);      // Reads in the current version
             in.close();
 
-            if (latestVersion > currentVersion)      // If there is a newer version
+            if(latestVersion > currentVersion)      // If there is a newer version
             {
                 String strUpdateMsg = "There are updates availible.\n"
                         + "Current version: " + input2 + "\n"
@@ -210,8 +201,7 @@ public class Tools
                                               "Availible Updates", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
-        }
-        catch (FileNotFoundException e)
+        } catch(FileNotFoundException e)
         {
             throw new Exception("The HUD is not currently installed", new Exception("Update Error"));
         }
@@ -234,16 +224,16 @@ public class Tools
 
             double inputVersion = in.nextDouble();          // Reads in the current version
             in.close();
-            if (inputVersion > Constants.INSTALLER_VERSION)  // If there is a newer version
+            if(inputVersion > Constants.INSTALLER_VERSION)  // If there is a newer version
             {
                 answer = JOptionPane.showConfirmDialog(null, "A new version of this " +
                                                                "installer is available" +
                                                                "\nWould you like to install it?",
-                                                       "Installer Update", JOptionPane.YES_NO_OPTION,
-                                                       JOptionPane.INFORMATION_MESSAGE);
+                                                      "Installer Update", JOptionPane.YES_NO_OPTION,
+                                                      JOptionPane.INFORMATION_MESSAGE);
             }
 
-            if (answer == 0)        // If the user wants to update
+            if(answer == 0)        // If the user wants to update
             {
                 Tools.downloadInstaller(URLDecoder.decode(path, "UTF-8"));
                 JOptionPane.showMessageDialog(null,
@@ -256,8 +246,7 @@ public class Tools
             {
                 return false;
             }
-        }
-        catch (IOException e)
+        } catch(IOException e)
         {
             JOptionPane.showMessageDialog(null,
                                           "ERROR: " + "Cannot Check Version Info",
@@ -280,8 +269,7 @@ public class Tools
         {
             URL urlInstaller = new URL(Constants.INSTALLER_URL);        // URL of the JAR download
             dl(installerPath, urlInstaller);                            // Downloads the JAR file
-        }
-        catch (Exception e)
+        } catch(Exception e)
         {
             JOptionPane.showMessageDialog(null,
                                           "ERROR: " + e.getMessage(),
@@ -300,8 +288,7 @@ public class Tools
         try
         {
             dl(zipPath, urlHUD);        // Downloads the HUD
-        }
-        catch (IOException e)
+        } catch(IOException e)
         {
             throw new Exception("The HUD could not be downloaded.", new Exception("Download Error", e));
         }
@@ -317,8 +304,7 @@ public class Tools
         try
         {
             unZip(zipPath, new File(strInstallPath + "temp/"));        // Unzips the ZIP file
-        }
-        catch (IOException e)
+        } catch(IOException e)
         {
             throw new Exception("The HUD could not be installed.\nPlease exit TF2 if it is open.",
                                 new Exception("Extraction Error", e));
@@ -336,11 +322,10 @@ public class Tools
         {
             FileUtils.copyDirectory(new File(strInstallPath + "temp/RebelHud-Master/custom/"),
                                     new File(strInstallPath));
-        }
-        catch (IOException e)
+        } catch(IOException e)
         {
             throw new Exception("The HUD could not be installed. File is being used by another program." +
-                                        "\nPlease exit TF2 if it is open.", new Exception("File copying error", e));
+                                "\nPlease exit TF2 if it is open.", new Exception("File copying error", e));
         }
     }
 
@@ -353,16 +338,16 @@ public class Tools
      */
     private static void unZip(File zipPath, File destPath) throws IOException
     {
-        if (!destPath.exists())
+        if(!destPath.exists())
         {
             destPath.mkdir();
         }
         ZipInputStream in = new ZipInputStream(new FileInputStream(zipPath));   // Input stream to read from the ZIP
         ZipEntry entry = in.getNextEntry();                                     // The entry from the ZIP file
-        while (entry != null)                                                    // While there are still entries
+        while(entry != null)                                                    // While there are still entries
         {
             String filePath = destPath + File.separator + entry.getName();
-            if (!entry.isDirectory())
+            if(!entry.isDirectory())
             {
                 extract(in, filePath);
             }
@@ -381,15 +366,15 @@ public class Tools
      * Extracts the ZIP file
      *
      * @param filePath Where to extract the files to
-     * @param in       Input stream of the file
+     * @param in Input stream of the file
      * @throws IOException
      */
     private static void extract(ZipInputStream in, String filePath) throws IOException
     {
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(filePath));
         byte[] bytes = new byte[4096];
-        int read;
-        while ((read = in.read(bytes)) != -1)
+        int read ;
+        while((read = in.read(bytes)) != -1)
         {
             out.write(bytes, 0, read);
         }
@@ -405,7 +390,7 @@ public class Tools
      */
     private static void dl(File file, URL url) throws Exception
     {
-        if (file != null)
+        if(file != null)
         {
             InputStream in;
             OutputStream out;
@@ -425,21 +410,21 @@ public class Tools
      */
     private static void delete(File file)
     {
-        if (file.isDirectory())
+        if(file.isDirectory())
         {
-            if (file.list().length == 0)
+            if(file.list().length == 0)
             {
                 file.delete();
             }
             else
             {
                 String files[] = file.list();
-                for (String path : files)
+                for(String path : files)
                 {
                     File deleteFile = new File(file, path);
                     delete(deleteFile);
                 }
-                if (file.list().length == 0)
+                if(file.list().length == 0)
                 {
                     file.delete();
                 }
@@ -462,7 +447,7 @@ public class Tools
     {
         byte[] buffer = new byte[2048];
         int bytesRead;
-        while ((bytesRead = in.read(buffer)) > 0)
+        while((bytesRead = in.read(buffer)) > 0)
         {
             out.write(buffer, 0, bytesRead);
         }
@@ -478,7 +463,7 @@ public class Tools
     {
         int firstDecimal = str.indexOf('.');
         String temp = str;
-        if (firstDecimal != -1)
+        if(firstDecimal != -1)
         {
             String firstHalf = str.substring(0, firstDecimal + 1);
             String secondHalf = str.substring(firstDecimal + 1);
